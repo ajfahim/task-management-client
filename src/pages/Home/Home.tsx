@@ -3,12 +3,7 @@ import React from 'react';
 
 const Home = () => {
     return (
-
-
-
         <Button>Hello</Button>
-
-
     );
 };
 

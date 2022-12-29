@@ -33,7 +33,7 @@ const NavBar = () => {
                 color="blue-gray"
                 className="p-1 font-semibold"
             >
-                <Link to="/" className="flex items-center">
+                <Link to="/add-task" className="flex items-center">
                     Add Task
                 </Link>
             </Typography>
