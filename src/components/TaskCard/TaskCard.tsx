@@ -12,26 +12,64 @@ import placeholderImage from "../../assets/placeholder.jpg";
 import { FaRegTrashAlt, FaEdit } from 'react-icons/fa'
 import DeleteModal from "../shared/DeleteModal/DeleteModal";
 import EditModal from "../shared/EditModal/EditModal";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import axios from "axios";
+import { toast } from "react-hot-toast";
 
 type ITasksProps = {
     _id: string,
     task: string,
     createdAt: boolean,
-    imageURL: string
-
-
+    imageURL: string,
+    isCompleted: boolean
 }
 
 
 
-const TaskCard: FC<ITasksProps> = ({ _id, imageURL, createdAt, task }) => {
+const TaskCard: FC<ITasksProps> = ({ _id, imageURL, createdAt, task, isCompleted }) => {
     // console.log(_id)
     const [open, setOpen] = useState(false);
     const [editOpen, setEditOpen] = useState(false);
+    const [complete, setComplete] = useState(false)
 
-    const handleClick = (_id: string) => {
+
+    const queryClient = useQueryClient()
+    type mutate = {
+        isCompleted: boolean
+
+    }
+
+
+    const updateTask = async (data: mutate,) => {
+        const res = await axios.put(`http://localhost:5000/task/${_id}`, data)
+        console.log(res)
+        return res.data
+    }
+
+
+    const completeMutation = useMutation({
+        mutationFn: updateTask,
+        onSuccess: () => {
+            toast.success("Changed status");
+            queryClient.invalidateQueries({ queryKey: ['tasks'] });
+            // setEditOpen(!editOpen)
+
+        }
+    })
+
+    const handleDetails = (_id: string) => {
         console.log("clicked card", _id)
     }
+
+    const handleComplete = () => {
+        completeMutation.mutate(
+            {
+                isCompleted: !isCompleted
+
+            }
+        )
+    }
+
     const handleDelete = (_id: string) => {
         setOpen(!open)
 
@@ -67,7 +105,13 @@ const TaskCard: FC<ITasksProps> = ({ _id, imageURL, createdAt, task }) => {
                         </IconButton>
                     </div>
                     <div className="flex items-center justify-center gap-3 py-3">
-                        <Button size="sm" variant="outlined">Mark as Complete</Button>
+                        {
+                            isCompleted === false ?
+                                <Button onClick={handleComplete} size="sm" variant="outlined" color="green">Mark as Complete</Button>
+                                :
+                                <Button onClick={handleComplete} size="sm" variant="outlined" color="red">Mark as Incomplete</Button>
+                        }
+
                         <Button size="sm" variant="outlined">Details</Button>
                     </div>
                 </CardFooter>
