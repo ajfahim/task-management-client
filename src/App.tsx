@@ -1,3 +1,4 @@
+import { Toaster } from 'react-hot-toast';
 import { RouterProvider } from 'react-router';
 import router from './routes/route';
 
@@ -5,7 +6,10 @@ import router from './routes/route';
 function App() {
 
   return (
-    <RouterProvider router={router}></RouterProvider>
+    <>
+      <RouterProvider router={router}></RouterProvider>
+      <Toaster></Toaster>
+    </>
   );
 }
 

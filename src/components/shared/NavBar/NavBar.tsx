@@ -10,7 +10,7 @@ import {
     MenuItem,
     Avatar,
 } from "@material-tailwind/react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import Logo from '../../../assets/logo.png'
 
 const NavBar = () => {
@@ -32,9 +32,23 @@ const NavBar = () => {
                 color="blue-gray"
                 className="p-1 font-semibold"
             >
-                <Link to="/add-task" className="flex items-center">
+                <NavLink to="/" className={({ isActive }) =>
+                    isActive ? "text-teal-400" : undefined
+                }>
+                    My Tasks
+                </NavLink>
+            </Typography>
+            <Typography
+                as="li"
+                variant="small"
+                color="blue-gray"
+                className="p-1 font-semibold"
+            >
+                <NavLink to="/add-task" className={({ isActive }) =>
+                    isActive ? "text-teal-400" : undefined
+                }>
                     Add Task
-                </Link>
+                </NavLink>
             </Typography>
             <Typography
                 as="li"
@@ -42,19 +56,11 @@ const NavBar = () => {
                 color="blue-gray"
                 className="p-1 font-semibold"
             >
-                <Link to="/" className="flex items-center">
-                    My Task
-                </Link>
-            </Typography>
-            <Typography
-                as="li"
-                variant="small"
-                color="blue-gray"
-                className="p-1 font-semibold"
-            >
-                <Link to="/" className="flex items-center">
+                <NavLink to="/completed-task" className={({ isActive }) =>
+                    isActive ? "text-teal-400" : undefined
+                }>
                     Completed Task
-                </Link>
+                </NavLink>
             </Typography>
 
         </ul>
