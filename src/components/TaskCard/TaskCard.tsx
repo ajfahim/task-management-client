@@ -15,6 +15,7 @@ import EditModal from "../shared/EditModal/EditModal";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 type ITasksProps = {
     _id: string,
@@ -112,7 +113,7 @@ const TaskCard: FC<ITasksProps> = ({ _id, imageURL, createdAt, task, isCompleted
                                 <Button onClick={handleComplete} size="sm" variant="outlined" color="red">Mark as Incomplete</Button>
                         }
 
-                        <Button size="sm" variant="outlined">Details</Button>
+                        <Button size="sm" variant="outlined"><Link to={`/task/${_id}`}>Details</Link></Button>
                     </div>
                 </CardFooter>
             </Card>
