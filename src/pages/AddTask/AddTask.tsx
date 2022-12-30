@@ -47,7 +47,7 @@ const AddTask = () => {
 
     const handleSubmit = () => {
 
-        console.log("clicked")
+
         taskMutation.mutate(
             {
                 imageURL: imageURL,

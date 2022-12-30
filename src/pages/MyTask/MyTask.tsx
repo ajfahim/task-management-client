@@ -31,7 +31,7 @@ const MyTask = () => {
     return (
         <div className='w-full'>
             <Typography variant="h3">My Tasks</Typography>
-            <div className='mt-14 grid grid-cols-1 md:grid-cols-2 justify-items-center gap-20'>
+            <div className='my-14 grid grid-cols-1 md:grid-cols-2 justify-items-center gap-y-20 gap-x-10'>
                 {
                     data?.map((item: any) => (
                         <TaskCard key={item._id} {...item}></TaskCard>

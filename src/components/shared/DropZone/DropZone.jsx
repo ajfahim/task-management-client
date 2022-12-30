@@ -37,6 +37,7 @@ const DropZone = ({ setImageURL }) => {
     const [files, setFiles] = useState([]);
 
     const { getRootProps, getInputProps } = useDropzone({
+        maxFiles: 1,
         accept: {
             'image/*': []
         },
