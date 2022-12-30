@@ -42,7 +42,7 @@ const TaskCard: FC<ITasksProps> = ({ _id, imageURL, createdAt, task, isCompleted
 
 
     const updateTask = async (data: mutate,) => {
-        const res = await axios.put(`http://localhost:5000/task/${_id}`, data)
+        const res = await axios.put(`https://task-management-server-ajfahim.vercel.app/task/${_id}`, data)
         console.log(res)
         return res.data
     }

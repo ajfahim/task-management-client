@@ -29,7 +29,7 @@ const AddTask = () => {
 
 
     const postTask = async (data: mutate) => {
-        const res = await axios.post("http://localhost:5000/task", data)
+        const res = await axios.post("https://task-management-server-ajfahim.vercel.app/task", data)
         console.log(res)
         return res.data
     }

@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom';
 const TaskDetails = () => {
     const { id } = useParams()
     const getTaskDetails = async () => {
-        const res = await axios.get(`http://localhost:5000/task/${id}`);
+        const res = await axios.get(`https://task-management-server-ajfahim.vercel.app/task/${id}`);
         return res.data
     }
 

@@ -33,7 +33,7 @@ const EditModal = ({ editOpen, setEditOpen, task, _id }: editModalProps) => {
 
 
     const updateTask = async (data: mutate,) => {
-        const res = await axios.put(`http://localhost:5000/task/${_id}`, data)
+        const res = await axios.put(`https://task-management-server-ajfahim.vercel.app/task/${_id}`, data)
         console.log(res)
         return res.data
     }

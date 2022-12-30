@@ -1,19 +1,19 @@
-import { Button, Typography } from '@material-tailwind/react';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { Typography } from '@material-tailwind/react';
+import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import React, { ReactElement } from 'react';
+
 import TaskCard from '../../components/TaskCard/TaskCard';
 
 const MyTask = () => {
 
-    const queryClient = useQueryClient();
+
     const getTasks = async () => {
-        const res = await axios.get("http://localhost:5000/task");
+        const res = await axios.get("https://task-management-server-ajfahim.vercel.app/task");
         console.log(res.data)
         return res.data
     }
 
-    const { data } = useQuery({
+    const { data, isLoading } = useQuery({
         queryKey: ['tasks'],
         queryFn: getTasks
 
@@ -28,6 +28,11 @@ const MyTask = () => {
 
     // }
 
+    if (isLoading) {
+        return <div>Loading...</div>
+    }
+
+
     return (
         <div className='w-full'>
             <Typography variant="h3">My Tasks</Typography>
@@ -38,9 +43,11 @@ const MyTask = () => {
                     ))
                 } */}
                 {
-                    data?.filter((item: any) => item.isCompleted === false).map((item: any) => (
+                    data.length > 0 ? data?.filter((item: any) => item.isCompleted === false)?.map((item: any) => (
                         <TaskCard key={item._id} {...item}></TaskCard>
                     ))
+                        :
+                        <p>Loading...</p>
                 }
 
             </div>

@@ -19,7 +19,7 @@ const DeleteModal = ({ open, setOpen, task, _id }: deleteModalProps) => {
 
     const queryClient = useQueryClient()
     const deleteTask = async (data: string) => {
-        const res = await axios.delete(`http://localhost:5000/task/${data}`)
+        const res = await axios.delete(`https://task-management-server-ajfahim.vercel.app/task/${data}`)
         return (res.data)
     }
     const deleteMutation = useMutation({

@@ -8,7 +8,7 @@ const CompletedTask = () => {
 
     const queryClient = useQueryClient();
     const getTasks = async () => {
-        const res = await axios.get("http://localhost:5000/task");
+        const res = await axios.get("https://task-management-server-ajfahim.vercel.app/task");
         console.log(res.data)
         return res.data
     }
@@ -28,9 +28,11 @@ const CompletedTask = () => {
                     ))
                 } */}
                 {
-                    data?.filter((item: any) => item.isCompleted === true).map((item: any) => (
+                    data.length > 0 ? data?.filter((item: any) => item.isCompleted === true).map((item: any) => (
                         <TaskCard key={item._id} {...item}></TaskCard>
                     ))
+                        :
+                        <p>Loading...</p>
                 }
 
             </div>
